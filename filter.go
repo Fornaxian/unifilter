@@ -52,13 +52,13 @@ func FilterInput(input string, filterClass FilterClass) (ok bool, frunes Illegal
 		mapAppend(frunes, filterRuneSlice(input, controlRunes, filterControlCodes))
 	}
 	if filterClass&filterInvisiblePunctuation != 0 {
-		mapAppend(frunes, filterRuneSlice(input, controlRunes, filterInvisiblePunctuation))
+		mapAppend(frunes, filterRuneSlice(input, nonPrintingRunes, filterInvisiblePunctuation))
 	}
 	if filterClass&filterIllegalUnixPaths != 0 {
-		mapAppend(frunes, filterRuneSlice(input, controlRunes, filterIllegalUnixPaths))
+		mapAppend(frunes, filterRuneSlice(input, illegalPathRunesUnix, filterIllegalUnixPaths))
 	}
 	if filterClass&filterIllegalWindowsPaths != 0 {
-		mapAppend(frunes, filterRuneSlice(input, controlRunes, filterIllegalWindowsPaths))
+		mapAppend(frunes, filterRuneSlice(input, illegalPathRunesWindows, filterIllegalWindowsPaths))
 	}
 	if len(frunes) == 0 {
 		return true, nil
